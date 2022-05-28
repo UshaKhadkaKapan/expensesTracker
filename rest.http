@@ -1,0 +1,11 @@
+### user api
+### registration
+
+
+POST http://localhost:8000/api/v1/users
+Content-Type: 
+{
+    "name":"test name",
+    "email":"tst@gmail",
+    "password":"123456"
+}
