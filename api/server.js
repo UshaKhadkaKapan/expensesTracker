@@ -14,7 +14,7 @@ import userRouter from "./src/routers/userRouter.js";
 app.use("/api/v1/users", userRouter);
 
 app.use("/api/v1/users", (req, res) => {
-  res.send("requesr received, world");
+  res.send("request received, world");
 });
 
 app.get("/", (req, res) => {
