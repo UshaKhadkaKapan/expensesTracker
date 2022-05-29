@@ -6,14 +6,24 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   console.log(req.body);
 
-  // send data to the db query
+  try {
+    const result = await createTable(req.body);
+    console.log(result);
+    res.json({
+      status: "success",
+      message: "user created successfully",
+    });
+  } catch (error) {
+    let message = error.message;
 
-  const result = await createTable(req.body);
-  console.log(result);
-  res.json({
-    status: "success",
-    message: "user created successfully",
-  });
+    if (message.includes("E11000 duplicate key error")) {
+      message = "This email is already registered";
+    }
+    res.json({
+      status: "error",
+      message,
+    });
+  }
 });
-
+// send data to the db query
 export default router;

@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 
+import cors from "cors";
+app.use(cors());
+
 import createConnection from "./src/config/dbConfig.js";
 createConnection();
 
