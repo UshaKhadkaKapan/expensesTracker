@@ -71,6 +71,11 @@ const Register = () => {
               Submit
             </Button>
           </Form.Group>
+          <div className="text-end">
+            <p>
+              ALready have an account? <a href="/login">Login</a>
+            </p>
+          </div>
         </Form>
       </div>
     </Layout>

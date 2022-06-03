@@ -1,6 +1,11 @@
 import UserSchema from "./User.schema.js";
 
 // create a new user in the table
-export const createTable = (newUserObj) => {
+export const createUser = (newUserObj) => {
   return UserSchema(newUserObj).save();
+};
+
+// find a user, @userObj hould have email and password
+export const findUser = (userObj) => {
+  return UserSchema.findOne(userObj);
 };

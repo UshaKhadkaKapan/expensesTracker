@@ -1,11 +1,12 @@
 .wrapper {
-  min-height: 75vh;
+  min-height: 70vh;
 }
 
 .center {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .center form {

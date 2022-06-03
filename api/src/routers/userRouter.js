@@ -1,5 +1,5 @@
 import express from "express";
-import { createTable } from "../../modules/user/User.model.js";
+import { createUser, findUser } from "../../modules/user/User.model.js";
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   console.log(req.body);
 
   try {
-    const result = await createTable(req.body);
+    const result = await createUser(req.body);
     console.log(result);
     res.json({
       status: "success",
@@ -22,6 +22,31 @@ router.post("/", async (req, res) => {
     res.json({
       status: "error",
       message,
+    });
+  }
+});
+
+// user login
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await findUser({ email, password });
+
+    if (user?._id) {
+      return res.json({
+        status: "success",
+        message: "user logged in successfully",
+        user: user,
+      });
+    }
+    res.json({
+      status: "error",
+      message: "Invalid credintials",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
     });
   }
 });
