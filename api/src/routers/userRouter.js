@@ -33,10 +33,12 @@ router.post("/login", async (req, res) => {
     const user = await findUser({ email, password });
 
     if (user?._id) {
+      user.password = undefined;
+
       return res.json({
         status: "success",
         message: "user logged in successfully",
-        user: user,
+        user,
       });
     }
     res.json({

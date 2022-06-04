@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import Layout from "../../components/layout/Layout";
-import { postUser } from "../../helpers/axiosHelper";
-import { Link } from "react-router-dom";
+import { loginUser, postUser } from "../../helpers/axiosHelper";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigation = useNavigate();
   const [form, setForm] = useState({});
   const [response, setResponse] = useState({
     status: " ",
@@ -22,9 +23,28 @@ const Login = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    alert("havent use it yet");
+
+    const res = await loginUser(form);
+    if (res.status === "success") {
+      window.sessionStorage.setItem("user", JSON.stringify(res.user));
+      navigation("/dashboard");
+    } else setResponse(res);
   };
-  console.log(response);
+
+  const inputField = [
+    {
+      name: "email",
+      label: "Email address",
+      type: "email",
+      required: true,
+    },
+    {
+      name: "password",
+      label: "password",
+      type: "password",
+      required: true,
+    },
+  ];
   return (
     <Layout>
       <div className="center">
@@ -39,25 +59,17 @@ const Login = () => {
               {response.message}
             </Alert>
           )}
+          {inputField.map(({ label, ...rest }, i) => (
+            <Form.Group key={i} className="mb-3" controlId="formGroupPassword">
+              <Form.Label>{label}</Form.Label>
+              <Form.Control
+                onChange={handleOnChange}
+                placeholder={label}
+                {...rest}
+              />
+            </Form.Group>
+          ))}
 
-          <Form.Group className="mb-3" controlId="formGroupPassword">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              onChange={handleOnChange}
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              onChange={handleOnChange}
-              type="password"
-              name="password"
-              placeholder="Enter password"
-            />
-          </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Button variant="primary" type="submit">
               Login
