@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 import { postUser } from "../../helpers/axiosHelper";
 import { Link } from "react-router-dom";
 
-const Register = () => {
+const Login = () => {
   const [form, setForm] = useState({});
   const [response, setResponse] = useState({
     status: " ",
@@ -22,15 +22,14 @@ const Register = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const result = await postUser(form);
-    setResponse(result);
+    alert("havent use it yet");
   };
   console.log(response);
   return (
     <Layout>
       <div className="center">
         <Form onSubmit={handleOnSubmit}>
-          <h3>Register New Form</h3>
+          <h3>Welcome Back</h3>
           <hr />
 
           {response.message && (
@@ -40,15 +39,7 @@ const Register = () => {
               {response.message}
             </Alert>
           )}
-          <Form.Group className="mb-3" controlId="formGroupEmail">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              onChange={handleOnChange}
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-            />
-          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -69,12 +60,12 @@ const Register = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Button variant="primary" type="submit">
-              Register
+              Login
             </Button>
           </Form.Group>
           <div className="text-end">
             <p>
-              ALready have an account? <Link to="/">Login</Link>
+              Dont have account yet?<Link to="/register">Sign up</Link>
             </p>
           </div>
         </Form>
@@ -83,4 +74,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
