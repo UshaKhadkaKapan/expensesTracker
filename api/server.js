@@ -15,10 +15,9 @@ createConnection();
 
 import userRouter from "./src/routers/userRouter.js";
 app.use("/api/v1/users", userRouter);
+import transactionRouter from "./src/routers/transcationRouter.js";
 
-app.use("/api/v1/users", (req, res) => {
-  res.send("request received, world");
-});
+app.use("/api/v1/transactions", transactionRouter);
 
 app.get("/", (req, res) => {
   res.send("we will send react app here");
