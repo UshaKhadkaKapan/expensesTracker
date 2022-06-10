@@ -3,6 +3,8 @@ import { createUser, findUser } from "../../modules/user/User.model.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {});
+
 router.post("/", async (req, res) => {
   console.log(req.body);
 

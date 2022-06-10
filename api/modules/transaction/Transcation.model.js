@@ -1,11 +1,15 @@
 import TransactionSchema from "./User.schema.js";
 
 // create a new user in the table
-export const createTransaction = (newUserObj) => {
+export const createTransaction = (newTransactionObj) => {
   return TransactionSchema(newTransactionObj).save();
 };
 
 // find a user, @userObj hould have email and password
-export const findUser = (TransactionObj) => {
-  return TransactionSchema.findOne(TransactionObj);
+export const findTransaction = (filter) => {
+  return TransactionSchema.findOne(filter);
+};
+
+export const findTransactions = (filter) => {
+  return TransactionSchema.find(filter);
 };

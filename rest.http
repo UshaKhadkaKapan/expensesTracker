@@ -20,3 +20,9 @@ Content-Type: application/json
     "email":"tst@gmail",
     "password":"123456"
 }
+
+### transaction api
+
+GET http://localhost:8000/api/v1/transaction
+Authorization: "_id"
+

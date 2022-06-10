@@ -29,7 +29,13 @@ const Dashboard = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await postTransaction(form);
+    const { _id } = JSON.parse(window.sessionStorage.getItem("user"));
+
+    if (!_id) {
+      return alert("Please Login first");
+    }
+
+    const result = await postTransaction({ ...form, userId: _id });
     setResp(result);
   };
 
